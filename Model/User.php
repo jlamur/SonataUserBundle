@@ -701,7 +701,7 @@ abstract class User extends AbstractedUser implements UserInterface
      *
      * @return User
      */
-    public function setImage(Media $image)
+    public function setImage($image)
     {
         $this->image = $image;
 
