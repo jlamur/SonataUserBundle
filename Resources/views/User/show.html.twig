@@ -1,0 +1,105 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'SonataAdminBundle:CRUD:base_show.html.twig' %}
+
+{% block show %}
+<div class="sonata-ba-view">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    {% if object.image is not null %}
+                        {% thumbnail object.image, 'admin' with {'width': 100, 'height': 100, 'class': 'iprofile-user-img img-responsive img-circle', 'alt': 'User profile picture'} %}
+                    {% else %}
+                        <img class="profile-user-img img-responsive img-circle" src="{{ asset(sonata_user.defaultAvatar) }}" alt="User profile picture">
+                    {% endif %}
+
+                    <h3 class="profile-username text-center">{{ object.fullName }}</h3>
+                    <p class="text-center">@{{ object.username }}</p>
+                    <p class="text-muted text-center">{{ object.biography }}</p>
+
+                    {% if admin.isGranted('EDIT') %}
+                        <hr/>
+                        <a href="{{ admin.generateObjectUrl('edit', object) }}" class="btn btn-primary btn-block">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            <b>
+                                {{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}
+                            </b>
+                        </a>
+                    {% endif %}
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ 'Social'|trans({}, 'SonataUserBundle') }}</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-facebook margin-r-5"></i> Facebook :</strong>
+
+                    <span class="text-muted">
+                        {% set fbUrl = null %}
+                        {% set fbLabel = null %}
+                        {% if object.facebookUid is not null %}
+                            {% set fbUrl = 'https://www.facebook.com/' ~ facebookUid %}
+                            {% set fbLabel = fbUrl %}
+                        {% endif %}
+
+                        {% if object.facebookName is not null %}
+                            {% set fbLabel = object.facebookName %}
+                        {% endif %}
+
+                        {% if fbUrl is not null %}
+                            <a href="{{ fbUrl }}">{{ fbLabel }}</a>
+                        {% elseif fbLabel is not null %}
+                            {{ fbLabel }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </span>
+
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                    <p class="text-muted">Malibu, California</p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+
+                    <p>
+                        <span class="label label-danger">UI Design</span>
+                        <span class="label label-success">Coding</span>
+                        <span class="label label-info">Javascript</span>
+                        <span class="label label-warning">PHP</span>
+                        <span class="label label-primary">Node.js</span>
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+{% endblock %}

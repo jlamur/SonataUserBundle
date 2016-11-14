@@ -17,6 +17,10 @@
             <call method="setTranslationDomain">
                 <argument>%sonata.user.admin.user.translation_domain%</argument>
             </call>
+            <call method="setTemplate">
+                <argument>show</argument>
+                <argument>SonataUserBundle:User:show.html.twig</argument>
+            </call>
         </service>
         <service id="sonata.user.admin.group" class="%sonata.user.admin.group.class%">
             <tag name="sonata.admin" label_catalogue="%sonata.user.admin.label_catalogue%" manager_type="doctrine_mongodb" group="%sonata.user.admin.groupname%" label="groups" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
