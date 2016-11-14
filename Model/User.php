@@ -12,6 +12,7 @@
 namespace Sonata\UserBundle\Model;
 
 use FOS\UserBundle\Entity\User as AbstractedUser;
+use Sonata\MediaBundle\Model\Media;
 
 /**
  * Represents a User model.
@@ -127,6 +128,11 @@ abstract class User extends AbstractedUser implements UserInterface
      * @var string
      */
     protected $token;
+
+    /**
+     * @var Media
+     */
+    protected $image;
 
     /**
      * Returns a string representation.
@@ -678,6 +684,26 @@ abstract class User extends AbstractedUser implements UserInterface
     public function setRealRoles(array $roles)
     {
         $this->setRoles($roles);
+
+        return $this;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param Media $image
+     *
+     * @return User
+     */
+    public function setImage(Media $image)
+    {
+        $this->image = $image;
 
         return $this;
     }

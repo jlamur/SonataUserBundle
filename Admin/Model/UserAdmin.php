@@ -127,6 +127,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('groups')
             ->end()
             ->with('Profile')
+                ->add('image')
                 ->add('dateOfBirth')
                 ->add('firstname')
                 ->add('lastname')
@@ -184,6 +185,13 @@ class UserAdmin extends AbstractAdmin
                     ))
                 ->end()
                 ->with('Profile')
+                    ->add('image', 'sonata_type_model_list', array(
+                        'required' => false
+                    ), array(
+                        'link_parameters' => array(
+                            'provider' => 'sonata.media.provider.image'
+                        )
+                    ))
                     ->add('dateOfBirth', 'sonata_type_date_picker', array(
                         'years' => range(1900, $now->format('Y')),
                         'dp_min_date' => '1-1-1900',

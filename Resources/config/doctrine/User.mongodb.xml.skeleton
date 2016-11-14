@@ -8,6 +8,10 @@
 
         <field fieldName="id" id="true" strategy="INCREMENT" />
 
+        <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Document\Media">
+            <join-column name="image_id" referenced-column-name="id" />
+        </many-to-one>
+
     </document>
 
 </doctrine-mongo-mapping>
